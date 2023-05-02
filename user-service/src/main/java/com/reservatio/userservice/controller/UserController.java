@@ -6,7 +6,6 @@ import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,13 +23,8 @@ public class UserController {
 
   private final UserService userService;
 
-  @Value("${test.property}")
-  String testProperty;
-
   @GetMapping
   public ResponseEntity<List<UserDto>> getAll() {
-
-    log.info("testProperty: {}", testProperty);
     return ResponseEntity.ok(userService.listUsers());
   }
 
