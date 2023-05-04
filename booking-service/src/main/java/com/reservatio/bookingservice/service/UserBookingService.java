@@ -5,9 +5,9 @@ import java.util.List;
 
 public interface UserBookingService {
 
-  List<ReservationDto> listReservations(Long userId);
+  List<ReservationDto> listReservations(String userId);
 
-  ReservationDto getReservationById(Long userId, String reservationId);
+  ReservationDto getReservationById(String userId, String reservationId);
 
-  ReservationDto saveReservation(Long userId, ReservationDto reservation);
+  ReservationDto saveReservation(String userId, ReservationDto reservation);
 }

@@ -1,6 +1,5 @@
-package com.reservatio.bookingservice.dto;
+package com.reservatio.userservice.dto;
 
-import com.reservatio.bookingservice.domain.ReservationStatusEnum;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;

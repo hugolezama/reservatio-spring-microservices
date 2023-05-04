@@ -25,7 +25,7 @@ public class Reservation {
   @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
   @GeneratedValue(generator = "UUID")
   private UUID reservationId;
-  private Long userId;
+  private UUID userId;
   private Long officeId;
   private LocalDate date;
   private LocalTime startTime;
