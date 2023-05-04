@@ -18,8 +18,8 @@ spring:
         - id: user-service
           uri: lb://user-service
           predicates:
-            - Path=/user/**
+            - Path=/user/**, /booking/**
         - id: booking-service
           uri: lb://booking-service
           predicates:
-            - Path=/booking/**
+            - Path=/public/booking/**
