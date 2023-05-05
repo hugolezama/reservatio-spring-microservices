@@ -2,6 +2,7 @@ package com.reservatio.userservice.service;
 
 import com.reservatio.userservice.dto.ReservationDto;
 import com.reservatio.userservice.feign.BookingFeignClient;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,4 +17,6 @@ public class UserBookingServiceImpl implements UserBookingService {
   public List<ReservationDto> getAllReservations(String userId) {
     return bookingFeignClient.getAllUserReservation(userId);
   }
+
+
 }
