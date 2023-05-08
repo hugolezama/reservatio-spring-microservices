@@ -20,19 +20,13 @@ spring:
           predicates:
             - Path=/user/**, /booking/**
           filters:
-            - name: CircuitBreaker
-              args:
-                name: bookingServiceCB
-                fallbackUri: forward:/global-fallback
+            - CircuitBreaker=userServiceCB
         - id: booking-service
           uri: lb://booking-service
           predicates:
             - Path=/public/booking/**
           filters:
-            - name: CircuitBreaker
-              args:
-                name: userServiceCB
-                fallbackUri: forward:/global-fallback
+            - CircuitBreaker=bookingServiceCB
 resilience4j.circuitbreaker:
   configs:
     default:
