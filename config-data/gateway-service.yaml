@@ -29,21 +29,20 @@ spring:
           predicates:
             - Path=/public/booking/**
 
-resilience4j:
-  circuitbreaker:
-    configs:
-      default:
-        registerHealthIndicator: true
-        slidingWindowSize: 10
-        slidingWindowType: COUNT_BASED
-        minimumNumberOfCalls: 3
-        permittedNumberOfCallsInHalfOpenState: 3
-        automaticTransitionFromOpenToHalfOpenEnabled: true
-        waitDurationInOpenState: 5s
-        failureRateThreshold: 50
-        eventConsumerBufferSize: 10
-    instances:
-      userServiceCB:
-        baseConfig: default
-      bookingServiceCB:
-        baseConfig: default
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      slidingWindowType: COUNT_BASED
+      minimumNumberOfCalls: 3
+      permittedNumberOfCallsInHalfOpenState: 3
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      waitDurationInOpenState: 5s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+  instances:
+    userServiceCB:
+      baseConfig: default
+    bookingServiceCB:
+      baseConfig: default
