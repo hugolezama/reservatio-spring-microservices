@@ -22,12 +22,17 @@ spring:
           filters:
             - name: CircuitBreaker
               args:
-                name: userServiceCB
+                name: genericCB
                 fallbackUri: forward:/global-fallback
         - id: booking-service
           uri: lb://booking-service
           predicates:
             - Path=/public/booking/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: genericCB
+                fallbackUri: forward:/global-fallback
 
 resilience4j.circuitbreaker:
   configs:
@@ -42,7 +47,5 @@ resilience4j.circuitbreaker:
       failureRateThreshold: 50
       eventConsumerBufferSize: 10
   instances:
-    userServiceCB:
-      baseConfig: default
-    bookingServiceCB:
+    genericCB:
       baseConfig: default
