@@ -25,11 +25,11 @@ spring:
                 retries: 3
                 methods: GET
                 backoff:
-                  firstBackoff: 1s
-                  maxBackoff: 5s
+                  firstBackoff: 1000ms
+                  maxBackoff: 5000ms
                   factor: 2
                   basedOnPreviousValue: false
-#            - name: CircuitBreaker
+        #            - name: CircuitBreaker
         #              args:
         #                name: genericCB
         #                fallbackUri: forward:/global-fallback
