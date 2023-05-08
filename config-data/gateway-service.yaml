@@ -24,6 +24,7 @@ spring:
               args:
                 retries: 3
                 methods: GET
+                statuses: BAD_GATEWAY
                 backoff:
                   firstBackoff: 1000ms
                   maxBackoff: 5000ms
