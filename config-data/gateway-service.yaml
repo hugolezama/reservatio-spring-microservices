@@ -20,6 +20,10 @@ spring:
           predicates:
             - Path=/user/**, /booking/**
           filters:
+            - name: CircuitBreaker
+              args:
+                name: genericCB
+                fallbackUri: forward:/global-fallback
             - name: Retry
               args:
                 retries: 3
@@ -27,10 +31,6 @@ spring:
                 backoff:
                   firstBackoff: 1s
                   maxBackoff: 5s
-            - name: CircuitBreaker
-              args:
-                name: genericCB
-                fallbackUri: forward:/global-fallback
         - id: booking-service
           uri: lb://booking-service
           predicates:
