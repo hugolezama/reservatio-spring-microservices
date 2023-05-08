@@ -29,10 +29,10 @@ spring:
                   maxBackoff: 5s
                   factor: 2
                   basedOnPreviousValue: false
-            - name: CircuitBreaker
-              args:
-                name: genericCB
-                fallbackUri: forward:/global-fallback
+#            - name: CircuitBreaker
+        #              args:
+        #                name: genericCB
+        #                fallbackUri: forward:/global-fallback
         - id: booking-service
           uri: lb://booking-service
           predicates:
