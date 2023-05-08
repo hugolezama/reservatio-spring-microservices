@@ -24,12 +24,12 @@ spring:
               args:
                 retries: 3
                 methods: GET
-                statuses: SERVICE_UNAVAILABLE
+                statuses: SERVICE_UNAVAILABLE, BAD_GATEWAY, INTERNAL_SERVER_ERROR
                 backoff:
                   firstBackoff: 50ms
                   maxBackoff: 500ms
                   factor: 2
-                  basedOnPreviousValue: true
+                  basedOnPreviousValue: false
         #            - name: CircuitBreaker
         #              args:
         #                name: genericCB
