@@ -8,6 +8,16 @@ eureka:
       default-zone: http://localhost:8761/eureka
   instance:
     hostname: localhost
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
 spring:
   cloud:
     gateway:
@@ -24,7 +34,7 @@ spring:
               args:
                 retries: 3
                 methods: GET
-                statuses: BAD_GATEWAY
+                #                statuses: BAD_GATEWAY
                 backoff:
                   firstBackoff: 50ms
                   maxBackoff: 500ms
