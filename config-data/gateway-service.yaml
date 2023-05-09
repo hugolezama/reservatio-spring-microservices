@@ -18,6 +18,9 @@ management:
     web:
       exposure:
         include: prometheus
+  tracing:
+    sampling:
+      probability: 1.0
 spring:
   cloud:
     gateway:
@@ -76,7 +79,6 @@ resilience4j.circuitbreaker:
   instances:
     genericCB:
       baseConfig: default
-
 logging:
   pattern:
     level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
