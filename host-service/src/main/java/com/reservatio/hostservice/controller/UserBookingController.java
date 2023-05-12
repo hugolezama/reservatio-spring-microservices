@@ -1,8 +1,9 @@
-package com.reservatio.userservice.controller;
+package com.reservatio.hostservice.controller;
 
-import com.reservatio.userservice.dto.ReservationDto;
-import com.reservatio.userservice.service.UserBookingService;
+import com.reservatio.hostservice.dto.ReservationDto;
+import com.reservatio.hostservice.service.HostBookingService;
 import java.util.List;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -14,15 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/user-booking")
+@RequestMapping("/api/host-booking")
 public class UserBookingController {
 
-  private final UserBookingService service;
+  private final HostBookingService service;
 
   @GetMapping("/reservation")
-  public ResponseEntity<List<ReservationDto>> getAllReservations(@RequestHeader String userId) {
+  public ResponseEntity<List<ReservationDto>> getAllReservations(@RequestHeader UUID hostId) {
     log.info("getAllReservations");
-    return ResponseEntity.ok(service.getAllReservations(userId));
+    return ResponseEntity.ok(service.getAllReservations(hostId));
   }
 
 }

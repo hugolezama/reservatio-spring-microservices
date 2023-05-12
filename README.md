@@ -3,6 +3,8 @@
   * CRUD Property
   * CRUD Office
   * Update Office Availability
+  * List all reservations
+  * Get reservation
   * Cancel reservation (by Host)
 
 * User Service

@@ -19,20 +19,20 @@ public class UserBookingServiceImpl implements UserBookingService {
   private final ReservationRepository reservationRepository;
 
   @Override
-  public List<ReservationDto> listReservations(String userId) {
-    return mapper.toDto(reservationRepository.findByUserId(UUID.fromString(userId))
+  public List<ReservationDto> listReservations(UUID userId) {
+    return mapper.toDto(reservationRepository.findByUserId(userId)
         .orElseThrow());
   }
 
   @Override
-  public ReservationDto getReservationById(String userId, String reservationId) {
-    Reservation found = reservationRepository.findByReservationIdAndUserId(UUID.fromString(reservationId), UUID.fromString(userId))
+  public ReservationDto getReservationById(UUID userId, UUID reservationId) {
+    Reservation found = reservationRepository.findByReservationIdAndUserId(reservationId, userId)
         .orElseThrow();
     return mapper.toDto(found);
   }
 
   @Override
-  public ReservationDto saveReservation(String userId, ReservationDto reservationDto) {
-    return mapper.toDto(reservationRepository.save(mapper.toEntity(reservationDto.withUserId(UUID.fromString(userId)))));
+  public ReservationDto saveReservation(UUID userId, ReservationDto reservationDto) {
+    return mapper.toDto(reservationRepository.save(mapper.toEntity(reservationDto.withUserId(userId))));
   }
 }

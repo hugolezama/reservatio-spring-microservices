@@ -4,6 +4,7 @@ import com.reservatio.bookingservice.dto.ReservationDto;
 import com.reservatio.bookingservice.service.UserBookingService;
 import jakarta.validation.Valid;
 import java.util.List;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -18,13 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/user/{userId}/reservation")
+@RequestMapping("/api/user/{userId}/reservation")
 public class UserBookingController {
 
   private final UserBookingService userBookingService;
 
   @GetMapping
-  public ResponseEntity<List<ReservationDto>> getAllUserReservation(@PathVariable String userId) {
+  public ResponseEntity<List<ReservationDto>> getAllUserReservation(@PathVariable UUID userId) {
     log.info("getAllUserReservation userId: {}", userId);
     return ResponseEntity.ok(userBookingService.listReservations(userId));
   }
@@ -56,13 +57,13 @@ public class UserBookingController {
 //  }
 
   @GetMapping("/{reservationId}")
-  public ResponseEntity<ReservationDto> getById(@PathVariable("userId") String userId,
-      @PathVariable("reservationId") String reservationId) {
+  public ResponseEntity<ReservationDto> getById(@PathVariable("userId") UUID userId,
+      @PathVariable("reservationId") UUID reservationId) {
     return ResponseEntity.ok(userBookingService.getReservationById(userId, reservationId));
   }
 
   @PostMapping
-  public ResponseEntity<ReservationDto> createReservation(@PathVariable("userId") String userId,
+  public ResponseEntity<ReservationDto> createReservation(@PathVariable("userId") UUID userId,
       @RequestBody @Valid ReservationDto reservationDto) {
     ReservationDto saved = userBookingService.saveReservation(userId, reservationDto);
     return ResponseEntity.status(HttpStatus.CREATED).body(saved);

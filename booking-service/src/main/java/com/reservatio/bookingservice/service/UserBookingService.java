@@ -2,12 +2,13 @@ package com.reservatio.bookingservice.service;
 
 import com.reservatio.bookingservice.dto.ReservationDto;
 import java.util.List;
+import java.util.UUID;
 
 public interface UserBookingService {
 
-  List<ReservationDto> listReservations(String userId);
+  List<ReservationDto> listReservations(UUID userId);
 
-  ReservationDto getReservationById(String userId, String reservationId);
+  ReservationDto getReservationById(UUID userId, UUID reservationId);
 
-  ReservationDto saveReservation(String userId, ReservationDto reservation);
+  ReservationDto saveReservation(UUID userId, ReservationDto reservation);
 }
