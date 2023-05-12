@@ -31,34 +31,36 @@ spring:
         - id: user-service
           uri: lb://user-service
           predicates:
-            - Path=/user/**, /booking/**
+            - Path=/api/user/**, /api/user-booking/**
           filters:
             - name: Retry
               args:
                 retries: 3
                 methods: GET
-                #                statuses: BAD_GATEWAY
+                statuses: BAD_GATEWAY
                 backoff:
                   firstBackoff: 50ms
                   maxBackoff: 500ms
                   factor: 2
                   basedOnPreviousValue: false
-        #            - name: CircuitBreaker
-        #              args:
-        #                name: genericCB
-        #                fallbackUri: forward:/global-fallback
+            - name: CircuitBreaker
+              args:
+                name: genericCB
+                fallbackUri: forward:/global-fallback
         - id: booking-service
           uri: lb://booking-service
           predicates:
             - Path=/public/booking/**
           filters:
-            - name: Retry
+            - name: CircuitBreaker
               args:
-                retries: 3
-                methods: GET
-                backoff:
-                  firstBackoff: 50ms
-                  maxBackoff: 500ms
+                name: genericCB
+                fallbackUri: forward:/global-fallback
+        - id: host-service
+          uri: lb://host-service
+          predicates:
+            - Path=/api/host/**, /api/host-booking/**
+          filters:
             - name: CircuitBreaker
               args:
                 name: genericCB
