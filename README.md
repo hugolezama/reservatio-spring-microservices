@@ -1,15 +1,21 @@
+# API Endpoints
+
 * Host Service
-  * Signup
-  * CRUD Property
-  * CRUD Office
-  * Update Office Availability
-  * List all reservations
-  * Get reservation
-  * Cancel reservation (by Host)
+    * Signup
+    * CRUD Property
+    * CRUD Office
+    * Update Office Availability
+    * List all reservations
+    * Get reservation
+    * Cancel reservation (by Host)
 
 * User Service
-  * Signup
+    * Signup
 
 * Booking Service
-  * Search availability
-  * CRUD reservation
+    * Search availability
+    * CRUD reservation
+
+# Architecture Diagram
+
+![Architecture](architecture.png)
