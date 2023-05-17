@@ -24,3 +24,5 @@ spring:
     username: ${DB_USERNAME:admin}
     password: ${DB_PASSWORD:Pass1234}
     driver-class-name: com.mysql.cj.jdbc.Driver
+  zipkin:
+    baseUrl: http://host.docker.internal:9411/
