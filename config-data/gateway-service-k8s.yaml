@@ -1,0 +1,79 @@
+server:
+  port: 8080
+eureka:
+  client:
+    fetch-registry: false
+    register-with-eureka: false
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+  tracing:
+    sampling:
+      probability: 1.0
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/user/**, /api/user-booking/**
+          filters:
+            - name: Retry
+              args:
+                retries: 3
+                methods: GET
+                statuses: BAD_GATEWAY
+                backoff:
+                  firstBackoff: 50ms
+                  maxBackoff: 500ms
+                  factor: 2
+                  basedOnPreviousValue: false
+            - name: CircuitBreaker
+              args:
+                name: genericCB
+                fallbackUri: forward:/global-fallback
+        - id: booking-service
+          uri: lb://booking-service
+          predicates:
+            - Path=/public/booking/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: genericCB
+                fallbackUri: forward:/global-fallback
+        - id: host-service
+          uri: lb://host-service
+          predicates:
+            - Path=/api/host/**, /api/host-booking/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: genericCB
+                fallbackUri: forward:/global-fallback
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      slidingWindowType: COUNT_BASED
+      minimumNumberOfCalls: 3
+      permittedNumberOfCallsInHalfOpenState: 3
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      waitDurationInOpenState: 5s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+  instances:
+    genericCB:
+      baseConfig: default
