@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: booking-service
+  name: booking-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: booking-service
+  template:
+    metadata:
+      labels:
+        app: booking-service
+    spec:
+      containers:
+        - name: booking-service
+          image: hlezama/booking-service
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "k8s"
+          ports:
+            - containerPort: 8081

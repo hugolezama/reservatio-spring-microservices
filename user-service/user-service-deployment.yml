@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: user-service
+  name: user-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: user-service
+  template:
+    metadata:
+      labels:
+        app: user-service
+    spec:
+      containers:
+        - image: hlezama/user-service
+          name: user-service
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "k8s"
+          ports:
+            - containerPort: 8082
